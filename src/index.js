@@ -10,10 +10,13 @@ const countryList = document.querySelector('.country-list');
 const countryInfo = document.querySelector('.country-info');
 
 
+
+
 function renderCountries(countries) {
     if (countries.length > 10) {
         countryList.innerHTML = '';
         countryInfo.innerHTML = '';
+        Notiflix.Notify.info('Too many matches found. Please enter a more specific name.');
     } else if (countries.length == 1) {
         countryInfo.innerHTML = `
             <p><img src="${countries[0].flags.svg}" width="30"> <b>${countries[0].name.official}</b></p>
@@ -38,13 +41,8 @@ cityName.addEventListener('input', debounce(() => {
         fetchCountries(cityValue)
             .then((response) => renderCountries(response))
             .catch((error) => {
-                console.log(error);
                 Notiflix.Notify.failure("Oops, there is no country with that name")
             });
-
-        if (cityValue.length == 1) {
-            Notiflix.Notify.warning('Too many matches found. Please enter a more specific name.');
-        }
     } else {
         countryList.innerHTML = '';
         countryInfo.innerHTML = '';
