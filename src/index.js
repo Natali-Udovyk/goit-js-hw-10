@@ -11,7 +11,10 @@ const countryInfo = document.querySelector('.country-info');
 
 
 function renderCountries(countries) {
-    if (countries.length == 1) {
+    if (countries.length > 10) {
+        countryList.innerHTML = '';
+        countryInfo.innerHTML = '';
+    } else if (countries.length == 1) {
         countryInfo.innerHTML = `
             <p><img src="${countries[0].flags.svg}" width="30"> <b>${countries[0].name.official}</b></p>
             <p><b>Capital:</b> ${countries[0].capital[0]}</p>
@@ -21,9 +24,6 @@ function renderCountries(countries) {
         countryList.innerHTML = '';
     } else if (countries.length > 1) {
         let markup = '';
-        // if (countries.length > 10) {
-        //     countries = countries.slice(0, 9);
-        // }
         for (let i = 0; i < countries.length; i++) {
             markup += `<li><img src="${countries[i].flags.svg}" width="30"> ${countries[i].name.official}</li>`;
         }
